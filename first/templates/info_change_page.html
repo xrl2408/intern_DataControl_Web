@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% block content %}
+    {% if request.session.is_login %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库查询显示</title>
+</head>
+<body>
+    <form action="/change_/" method="POST" class="form-horizontal" role="form">
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">name</label>
+            <div class="col-sm-6 ">
+                <input  class="form-control" name="name"  width="200" value="{{ v1 }}" >
+                <p class="help-block ">{{ error1 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">process</label>
+            <div class="col-sm-6">
+                <input class="form-control" id="process1" name="process"  width="200" value="{{ v2 }}" >
+                <p class="help-block">{{ error2 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">local_ip</label>
+            <div class="col-sm-6">
+                <input  class="form-control" name="local_ip"  width="200" value="{{ v3 }}">
+                <p class="help-block">{{ error3 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">local_port</label>
+            <div class="col-sm-6">
+                <input  class="form-control" name="local_port"  width="200" value="{{ v4 }}">
+                <p class="help-block">{{ error4 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">remote_ip</label>
+            <div class="col-sm-6">
+                <input  class="form-control" name="remote_ip"  width="200" value="{{ v5 }}">
+                <p class="help-block">{{ error5 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">remote_port</label>
+            <div class="col-sm-6">
+                <input  class="form-control" name="remote_port"  width="200" value="{{ v6 }}">
+                <p class="help-block">{{ error6 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">protocol</label>
+            <div class="col-sm-6">
+                <input  class="form-control" name="protocol"  width="200" value="{{ v7 }}">
+                <p class="help-block">{{ error7 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">direction</label>
+            <div class="col-sm-6">
+{#                <select name="direction" class="form-control">#}
+{#                    <option value ="inbound"{% if v8 == 'inbound' %} selected="selected" {% endif %}>inbound</option>#}
+{#                    <option value ="outbound" {% if v8 == 'outbound' %} selected="selected" {% endif %} >outbound</option>#}
+{#                </select>#}
+
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="direction" id="optionsRadios-direction1" value="inbound"  checked> inbound
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="direction" id="optionsRadios-direction2" value="outbound" {% if v8 == 'outbound' %} checked {% endif %}>outbound
+                    </label>
+                </div>
+
+                <p class="help-block">{{ error8 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">action</label>
+            <div class="col-sm-6">
+{#                <select name="action" class="form-control">#}
+{#                    <option value ="permit"{% if v9 == 'permit' %} selected="selected" {% endif %}>permit</option>#}
+{#                    <option value ="direct" {% if v9 == 'direct' %} selected="selected" {% endif %} >direct</option>#}
+{#                    <option value ="redirect" {% if v9 == 'redirect' %} selected="selected" {% endif %} >redirect</option>#}
+{#                </select>#}
+
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="action" onclick="hide()" id="optionsRadios-action1" value="permit"  checked> permit
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="action" onclick="hide()" id="optionsRadios-action2" value="direct" {% if v9 == 'direct' %} checked {% endif %}>direct
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="action" onclick="hide()" id="optionsRadios-action3" value="redirect" {% if v9 == 'redirect' %} checked {% endif %}>redirect
+                    </label>
+                </div>
+
+                <p class="help-block">{{ error9 }}</p>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">type</label>
+            <div class="col-sm-6">
+{#                <select name="type" class="form-control">#}
+{#                    <option value ="system"{% if v10 == 'system' %} selected="selected" {% endif %}>system</option>#}
+{#                    <option value ="control" {% if v10 == 'control' %} selected="selected" {% endif %} >control</option>#}
+{#                </select>#}
+
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="type" id="optionsRadios-type1" value="system"  checked> system
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="type" id="optionsRadios-type2" value="control" {% if v10 == 'control' %} checked {% endif %}>control
+                    </label>
+                </div>
+
+                <p class="help-block">{{ error10 }}</p>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">enalbled</label>
+            <div class="col-sm-6">
+{#                <select name="enalbled" class="form-control">#}
+{#                    <option value ="true"{% if v11 == 'true' %} selected="selected" {% endif %}>true</option>#}
+{#                    <option value ="false" {% if v11 == 'false' %} selected="selected" {% endif %} >false</option>#}
+{#                </select>#}
+
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="enalbled" id="optionsRadios1" value="true"  checked> true
+                    </label>
+                </div>
+                <div class="radio-inline">
+                    <label>
+                        <input type="radio" name="enalbled" id="optionsRadios2" value="false" {% if v11 == 'false' %} checked {% endif %}>false
+                    </label>
+                </div>
+
+                <p class="help-block">{{ error11 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">profile</label>
+            <div class="col-sm-6">
+                <label class="checkbox-inline" for="c1"><input type="checkbox" name="public" value="public" id="c1" {% if 'public' in v12 %} checked ='checked' {% endif %} />public</label>
+                <label class="checkbox-inline" for="c2"><input type="checkbox" name="private" value="private" id="c2" {% if 'private' in v12 %} checked ='checked' {% endif %} />private</label>
+                <label class="checkbox-inline" for="c3"><input type="checkbox" name="domain" value="domain" id="c3" {% if 'domain' in v12 %} checked ='checked' {% endif %} />domain</label>
+                <p class="help-block">{{ error12 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group" id="extra1" {% if v9 != 'redirect' %} style="display: none" {% endif %}>
+            <label class="col-sm-2 control-label">redirect_ip</label>
+            <div class="col-sm-6">
+                <input class="form-control" name="redirect_ip" id="extra1_input" width="200" value="{{ v13 }}">
+                <p class="help-block">{{ error13 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group" id="extra2" {% if v9 != 'redirect' %} style="display: none" {% endif %}>
+            <label class="col-sm-2 control-label">redirect_port</label>
+            <div class="col-sm-6">
+                <input class="form-control" name="redirect_port" id="extra2_input" width="200" value="{{ v14 }}">
+                <p class="help-block">{{ error14 }}</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-2 control-label">&nbsp;</label>
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-default pull-right" name="c_submit" onclick="return window.confirm('确认添加?');">添加</button>
+                <button type="submit" class="btn btn-default pull-left" name="c_back">返回</button>
+            </div>
+        </div>
+
+    </form>
+    {% if messages %}
+    <script>
+        {% for msg in messages %}
+            alert('{{ msg.message }}');
+        {% endfor %}
+    </script>
+{% endif %}
+
+{#    <button>back</button>#}
+<script>
+function hide()
+{
+    {#print(123123123)#}
+    if(document.getElementById("optionsRadios-action3").checked){
+        document.getElementById("extra1").style.display='block';
+        document.getElementById("extra2").style.display='block';
+    }
+    else{
+        document.getElementById("extra1_input").value ='';
+        document.getElementById("extra2_input").value ='';
+        document.getElementById("extra1").style.display='none';
+        document.getElementById("extra2").style.display='none';
+    }
+}
+</script>
+</body>
+</html>
+    {% else %}
+
+    <h1>你尚未登录，只能访问公开内容！</h1>
+
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+ 
+
+{% block title %}注册{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+
+        <div >
+
+            <form class='form-register' action="/back/" method="post">
+                <div class="form-group " >
+                    <div class="col-sm-3">
+                <input  class="form-control" name="search_name" placeholder="name" width="200" >
+
+                </div>
+                </div>
+
+        <button type="submit" class=" btn pull-left btn-default" name="search">search</button>
+
+              <button  class="btn btn-default pull-right" style="margin-bottom: 10px" name="log_b">Log</button>
+
+              <button  class="btn btn-default pull-left" style="margin-left: 10px" name="register">Add</button>
+        <table  class="table table-hover table-bordered" >
+            <tr>
+                <th class="text-center">name</th>
+                <th class="text-center">email</th>
+                <th class="text-center">level</th>
+                <th class="text-center" style="width: 160px">operation</th>
+            </tr>
+            {% for item in li %}
+            <tr>
+                <td class="text-center">{{ item.name }}</td>
+                <td class="text-center">{{ item.email }}</td>
+                {% if item.level == '1' %}<td class="text-center">只读</td>{% endif %}
+                {% if item.level == '2' %}<td class="text-center">添加删改</td>{% endif %}
+                {% if item.level == '3' %}<td class="text-center">admin</td>{% endif %}
+                <td class="text-center">
+                    <a class=" pull-right" style="margin-right: 5%" href = "/D_b/?id={{ item.id }}"  onclick="return window.confirm('确认删除?');">删除</a>
+                    <a  class="pull-right" style="margin-right: 15%" href = "/Change_b/?id={{ item.id }}">修改</a>
+                    <a  class="pull-right" style="margin-right: 15%" href = "/log_b/?id={{ item.id }} ">log</a>
+                </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+          </form>
+
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock %}

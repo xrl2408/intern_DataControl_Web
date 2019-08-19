@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import Article
 from .models import Rule
 from .models import firewall
+from .models import User
 # Register your models here.
 
 admin.site.site_header = '防火墙规则管理'
@@ -45,3 +46,4 @@ class firewallAdmin(admin.ModelAdmin):
 admin.site.register(Article,ArticleAdmin)
 admin.site.register(Rule,RuleAdmin)
 admin.site.register(firewall,FirewallAdmin)
+admin.site.register(User)

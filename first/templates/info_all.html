@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库查询显示</title>
+</head>
+<body>
+    {% if request.session.is_login %}
+    <form action="/search/" method="POST">
+
+        <div class="form-group " >
+            <div class="col-sm-3">
+                <input autocomplete="off" class="form-control" name="search_name" placeholder="name" width="200" >
+            </div>
+        </div>
+
+        <button type="submit" class=" btn btn-default pull-left" name="search">search</button>
+        {% if request.session.level == "2" or request.session.level == "3"%}
+            <button type="submit" class="btn btn-default " name="add" style="margin-left: 20px">add</button>
+        {% endif %}
+        <button type = 'submit' name = 'download' class="btn btn-default  pull-right" style="margin-right: 20px">download</button>
+        {% if request.session.level == "3"%}
+            <button type="submit" class="btn btn-default pull-right" style="margin-right: 10px" name="log">Log</button>
+        {% endif %}
+    </form>
+
+    <table  class="table  table-bordered table-hover col-md-1" style="margin-top: 10px;table-layout: fixed;/*使table的宽度固定*/
+
+        width: 100%;/*给table一个宽度*/">
+        <tr>
+            <th class="text-center" style="width: 5%">Id</th>
+            <th class="text-center" style="width: 38%">Content</th>
+            <th class="text-center" style="width: 23%">Add time/User</th>
+            <th class="text-center" style="width: 23%">Last Change/User</th>
+            <th class="text-center" style="width: 11%">operation</th>
+        </tr>
+        {% for item in li %}
+        <tr>
+            <td class="text-center">{{ item.id }}</td>
+            <td style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; " title="{{ item.content_all1 }}">{{ item.content_all1 }}</td>
+            <td class="text-center">{{ item.add_time }}</td>
+            <td class="text-center">{{ item.last_change }}</td>
+            {% if request.session.level == "2" or request.session.level == "3"%}
+            <td>
+            <a href = "/show/?id={{ item.id }}">详情</a>
+            <a href = "/change_/?id={{ item.id }}">修改</a>
+            <a href = "/D/?id={{ item.id }}"  onclick="return window.confirm('确认删除?');">删除</a>
+            {% if request.session.level == "3"%}
+                <a href = "/log/?id={{ item.id }}">Log</a>
+            {% endif %}
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+
+    <h1>你尚未登录，只能访问公开内容！</h1>
+
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}

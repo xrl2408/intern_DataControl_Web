@@ -3,24 +3,63 @@ from django.db import models
 # Create your models here.
 # class firewall_policy(models.Model):
 
+
+from django import forms
+
+class log_b(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    id_f = models.CharField(default='',max_length=128)
+    operation = models.CharField(default='',max_length=16)
+    user = models.CharField(default='',max_length=128)
+    befor = models.CharField(default='',max_length=512)
+    after = models.CharField(default='',max_length=512)
+
+class log(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    id_f = models.CharField(default='',max_length=128)
+    operation = models.CharField(default='',max_length=16)
+    user = models.CharField(default='',max_length=128)
+    befor = models.CharField(default='',max_length=512)
+    after = models.CharField(default='',max_length=512)
+
 class var(models.Model):
     var = models.CharField(default='',max_length=2000)
 
+class User(models.Model):
+    name = models.CharField(max_length=128,unique=True)
+    password = models.CharField(max_length=256)
+    level = models.CharField(default='',max_length=10)
+    c_time = models.DateTimeField(auto_now_add=True)
+    email = models.EmailField(default='',max_length=128)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['c_time']
+        verbose_name = 'user'
+        verbose_name_plural = 'user'
+
+
 class firewall(models.Model):
-    name = models.CharField(default='',max_length=2000)
+    name = models.CharField(default='',max_length=200)
     process = models.CharField(default='',max_length=200)
-    local_ip = models.CharField(default='',max_length=20)
-    local_port = models.CharField(default='',max_length=20)
-    remote_ip = models.CharField(default='',max_length=20)
-    remote_port = models.CharField(default='',max_length=20)
-    protocol = models.CharField(default='',max_length=20)
-    direction = models.CharField(default='',max_length=20)
-    action = models.CharField(default='',max_length=20)
-    type = models.CharField(default='',max_length=20)
-    enalbled = models.CharField(default='',max_length=20)
-    profile = models.CharField(default='',max_length=40)
-
-
+    local_ip = models.CharField(default='',max_length=200)
+    local_port = models.CharField(default='',max_length=200)
+    remote_ip = models.CharField(default='',max_length=200)
+    remote_port = models.CharField(default='',max_length=200)
+    protocol = models.CharField(default='',max_length=200)
+    direction = models.CharField(default='',max_length=200)
+    action = models.CharField(default='',max_length=200)
+    type = models.CharField(default='',max_length=200)
+    enalbled = models.CharField(default='',max_length=200)
+    profile = models.CharField(default='',max_length=400)
+    redirect_ip = models.CharField(default='',max_length=40)
+    redirect_port = models.CharField(default='', max_length=40)
+    # content_all = models.CharField(default='', max_length=400)
+    content_all1 = models.CharField(default='', max_length=400)
+    add_time = models.CharField(default='', max_length=400)
+    last_change = models.CharField(default='', max_length=400)
     def __str__(self):
         return self.name
 

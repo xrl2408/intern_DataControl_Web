@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据库查询显示</title>
+</head>
+<body>
+    {% if request.session.is_login %}
+{#    <form action="/search/" method="POST">#}
+{#        <input name="search_name" placeholder="name" width="200"/><button type="submit" class="btn btn-info" name="search">search</button>#}
+{#        {% if request.session.level == "2" or request.session.level == "3"%}<button type="submit" class="btn btn-info" name="add">add</button>{% endif %}#}
+{#    </form>#}
+{#        <button  class="btn btn-info" ><a href="/download/">download</a></button>#}
+       <form  action="/log/" method="post">
+           <div class="form-group " >
+            <div class="col-sm-3">
+                <input  class="form-control" name="search_name" placeholder="name" width="200" >
+
+            </div>
+        </div>
+
+        <button type="submit" class=" btn btn-default pull-left" name="search_log">search</button>
+           <button  class="btn btn-default pull-left" style="margin-bottom: 20px; margin-left: 20px" name="back">返回</button>
+       </form>
+    <table class="table table-striped table-bordered">
+        <tr>
+            <th class="text-center">time</th>
+            <th class="text-center">operation</th>
+            <th class="text-center">user</th>
+            <th class="text-center">befor</th>
+            <th class="text-center">after</th>
+        </tr>
+        {% for item in li %}
+        <tr>
+            <td>{{ item.time }}</td>
+            <td>{{ item.operation }}</td>
+            <td>{{ item.user }}</td>
+            <td>{{ item.befor }}</td>
+            <td>{{ item.after }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+
+    <h1>你尚未登录，只能访问公开内容！</h1>
+
+    {% endif %}
+
+</body>
+</html>
+{% endblock %}
