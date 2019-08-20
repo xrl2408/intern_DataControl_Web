@@ -99,6 +99,8 @@ venv.bak/
 
 # mkdocs documentation
 /site
-
+ .idea/ workspace.xml
 # mypy
 .mypy_cache/
+#
+ .idea/ workspace.xml

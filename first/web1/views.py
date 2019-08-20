@@ -12,7 +12,7 @@ import tkinter as tk
 from web1.forms import UserForm, RegisterForm
 from tkinter import filedialog
 
-
+# use salt to create a hash code to hash password
 def hash_code(s, salt='test1'):# 加点盐
 
     h = hashlib.sha256()
@@ -22,13 +22,19 @@ def hash_code(s, salt='test1'):# 加点盐
     h.update(s.encode())  # update方法只接收bytes类型
 
     return h.hexdigest()
+
+# delete user
 def D_b(request):
+    # confirm it's login
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
         return redirect('/login')
     else:
+        # get the id of user
         v = request.get_full_path().split("id=", 1)[1]
         tmp = models.User.objects.get(pk=v)
+        # delete
         models.User.objects.filter(id=v).delete()
+        # add log
         models.log_b.objects.create(operation='Delete', user=request.session['user_name'], befor=tmp.name+" level:"+tmp.level,
                                   after='',
                                   id_f=v)
@@ -36,20 +42,20 @@ def D_b(request):
         user_list = models.User.objects.all()
 
         return render(request, 'back.html', {'li': user_list})
+
+# change information of user
 def Change_b(request):
-    # if request.session.get('is_login', None):
-    #     # 登录状态不允许注册。你可以修改这条原则！
-    #     pass
-    # else:
-    #     return redirect("/login/")
+    # confirm it's login and level as admin
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
         return redirect('/login')
     if request.method == "POST":
-        # name1 = request.POST['name_b']
+        # back
         if 'back_regi_back' in request.POST:
             return redirect("/back/")
+        # get old information
         tmp1 = models.User.objects.get(pk=request.session['id_back'])
 
+        #get input
         p1 = request.POST['password1_b']
         p2 = request.POST['password2_b']
         power = request.POST['power_b']
@@ -57,6 +63,8 @@ def Change_b(request):
         # power = request.POST['level2']
         messages = ''
         values1 = {'v1':tmp1.name,'message': messages, 'v2': '', 'v3': '', 'v4': '','v5':''}
+
+        # judge the input
         if p1 != p2:
             messages = "两次输入密码不同"
             values1 = {'v1':tmp1.name,'message': messages, 'v2': '', 'v3': '', 'v4': power,'v5':email}
@@ -78,17 +86,20 @@ def Change_b(request):
                 values1 = {'v1': tmp1.name, 'message': messages, 'v2': p1, 'v3': p2, 'v4': power, 'v5': ''}
                 return render(request, 'back_regi.html', values1)
             else:
+                # add password no change
                 if p1 == tmp1.password:
                     models.User.objects.filter(id=request.session['id_back']).update(level=power, email=email)
                 else:
+                    # add password change , get new hash password
                     models.User.objects.filter(id=request.session['id_back']).update(password = hash_code(p1) ,level = power,email = email)
                 tmp2 = models.User.objects.get(pk=request.session['id_back'])
+                # add log
                 models.log_b.objects.create(operation='Change', user=request.session['user_name'],
                                             befor=tmp1.name+ " level:" + tmp1.level+" email:"+tmp1.email,
                                             after=tmp2.name+ " level:" + tmp2.level+" email:"+tmp2.email,
                                             id_f=tmp1.id)
                 return redirect("/back/")
-    # if request.POST['power_b']=='':
+    # init
     request.session['id_back'] = request.get_full_path().split("id=", 1)[1]
 
     tmp = models.User.objects.get(pk=request.session['id_back'])
@@ -96,15 +107,20 @@ def Change_b(request):
 
 
     return render(request, 'back_regi.html', values)
+
+# get log of user admin from database
 def log_b(request):
+    # get the request is one or all
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
         return redirect('/login')
     v = request.get_full_path().split("id=", 1)
     if len(v) == 1:
-
+        # request all log
         user_log_list = models.log_b.objects.all()
     else:
+        # request one user's log
         user_log_list = models.log_b.objects.filter(id_f = v[1])
+    # back
     if 'back' in request.POST:
         return redirect("/back/")
 
@@ -114,13 +130,8 @@ def log_b(request):
         list.append(li.time.strftime("%Y-%m-%d %H:%M")+' id: '+li.id_f+' operator: '+li.user+' operation: '+li.operation+' befor: '+li.befor+' after: '+li.after)
 
     return render(request, 'log_back.html', {'li': user_log_list})
-def add_b(request):
-    pass
-    # return render(request, 'back_regi.html')
-def cover(request):
-    pass
 
-    return render(request, 'cover.html')
+# login
 def login(request):
     #避免重复登陆
     if request.session.get('is_login', None):
@@ -143,6 +154,8 @@ def login(request):
                 user = models.User.objects.get(name=username)
 
                 if user.password == hash_code(password):
+
+                    # save user info into session
 
                     request.session['is_login'] = True
 
@@ -169,9 +182,14 @@ def login(request):
     login_form = UserForm()
 
     return render(request, 'login.html', locals())
+
+# link to different page from back.html
 def back(request):
+    # make sure session log_info is empty(used in search function in log of policy to get it's for on or for all)
     if request.session.get('log_info'):
         request.session.pop('log_info')
+
+    # confirm level
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
         return redirect('/login')
     user_list = models.User.objects.all()
@@ -183,14 +201,14 @@ def back(request):
         rule_list = models.User.objects.all().filter(name__icontains=request.POST['search_name'])
         return render(request, 'back.html', {'li': rule_list})
     return render(request,'back.html',{'li':user_list})
+
+# add user (by admin)
 def register(request):
 
-        # if request.session.get('is_login', None):
-        #     # 登录状态不允许注册。你可以修改这条原则！
-        #
-        #     return redirect("/index/")
+        # confirm level
         if not (request.session.get('is_login', None) and request.session.get('level') == '3'):
             return redirect('/login')
+        # back
         if 'CreatUser_back' in request.POST:
             return redirect("/back/")
         if request.method == "POST":
@@ -211,12 +229,12 @@ def register(request):
                 email = register_form.cleaned_data['email']
                 # level = register_form.cleaned_data['level']
                 level = register_form.cleaned_data['level2']
-
+                # not empty
                 if password1 == '' or password2 == '' or username =='' or level == '':
                     message = "不能为空！"
 
                     return render(request, 'CreateUser.html', locals())
-
+                # password not sure
                 if password1 != password2:  # 判断两次密码是否相同
 
                     message = "两次输入的密码不同！"
@@ -224,7 +242,7 @@ def register(request):
                     return render(request, 'CreateUser.html', locals())
 
                 else:
-
+                    # use name repeat
                     same_name_user = models.User.objects.filter(name=username)
 
                     if same_name_user:  # 用户名唯一
@@ -232,6 +250,8 @@ def register(request):
                         message = '用户已经存在，请重新选择用户名！'
 
                         return render(request, 'CreateUser.html', locals())
+
+                    # email repeat
 
                     same_email_user = models.User.objects.filter(email=email)
 
@@ -250,7 +270,7 @@ def register(request):
                         message = '邮箱地址错误'
 
                         return render(request, 'CreateUser.html', locals())
-                    # 当一切都OK的情况下，创建新用户
+                    # 当一切都OK的情况下，创建新用户 everything right
 
                     new_user = models.User.objects.create()
 
@@ -263,7 +283,7 @@ def register(request):
                     new_user.email = email
 
                     new_user.save()
-
+                    # add log
                     models.log_b.objects.create(operation='Add', user=request.session['user_name'],
                                                 befor='',
                                                 after=username + " level:" + level+" email:"+email,
@@ -273,43 +293,20 @@ def register(request):
 
         register_form = RegisterForm()
         return render(request, 'CreateUser.html', locals())
-def logout(request):
 
+#logout
+def logout(request):
+    # confirm it's login
     if not request.session.get('is_login', None):
 
         # 如果本来就未登录，也就没有登出一说
 
         return redirect("/login/")
-
+    # logout
     request.session.flush()
-
-    # 或者使用下面的方法
-
-    # del request.session['is_login']
-
-    # del request.session['user_id']
-
-    # del request.session['user_name']
-
     return redirect("/login/")
-def download(request):
 
-
-    root = tk.Tk()
-
-    root.withdraw()
-
-    file_path = filedialog.asksaveasfilename(title=u'保存文件', filetypes=[("TXT",".txt")])
-    print(file_path+".txt")
-    rule_list = models.firewall.objects.all()
-
-    f = open(file_path+".txt", 'a')
-    for li in rule_list:
-        f.write(li.content_all1)
-
-        f.write('\n')
-    root.destroy()
-    return render(request, 'info_all.html', {'li': rule_list})
+# check the policy input
 def check(a,b,type):
     ok = 1
     #name
@@ -332,9 +329,10 @@ def check(a,b,type):
         a['v3'] = ''
         ok = 0;
     else:
+        # ip match v4 or v6 or /*
         x = a['v3'].split("/")
         if len(x) ==1:
-
+            # v4 or v6
             if re.match(r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", x[0])\
                     or re.match(r"^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$", x[0], re.I):
                 pass
@@ -343,6 +341,7 @@ def check(a,b,type):
                 a['v3'] = ''
                 ok = 0;
         else:
+            # 2 part ip + /*(0-32(v4) / 0-128(v6))
             if (re.match(r"^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$", x[0])\
                   and  x[1].isdigit() and 0<=int(x[1])<=32 )or (re.match(r"^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$", x[0], re.I)and  x[1].isdigit() and 0<=int(x[1])<=128):
                 pass
@@ -357,7 +356,9 @@ def check(a,b,type):
         ok = 0;
     else:
         x = a['v4'].split("/")
+        # devide by /
         if len(x) == 1:
+            # one part - any or * (0-65535) or *(0-65536)-*(0-65535)
             if x[0] == "any":
                 pass
             else:
@@ -377,6 +378,7 @@ def check(a,b,type):
                         a['v4'] = ''
                         ok = 0;
         else:
+            # more than one part  */*/*/.....
             for xx in x:
                 if xx.isdigit() and 0<int(xx)<65535:
                     pass
@@ -389,6 +391,7 @@ def check(a,b,type):
                         a['v4'] = ''
                         ok = 0;
     #remote_ip
+    # same as local ip
     if not a['v5']:
         b['error5'] = '不能为空'
         a['v5'] = ''
@@ -413,6 +416,7 @@ def check(a,b,type):
                 a['v3'] = ''
                 ok = 0;
     #remote_port
+    # same as local port
     if not a['v6']:
         b['error6'] = '不能为空'
         a['v6'] = ''
@@ -460,6 +464,7 @@ def check(a,b,type):
     else:
         pass
     #direction
+    # inbound or outbound
     if not a['v8']:
         b['error8'] = '不能为空'
         a['v8'] = ''
@@ -472,6 +477,7 @@ def check(a,b,type):
             a['v8'] = ''
             ok = 0;
     #action
+    # permit or direct or redirect
     if not a['v9']:
         b['error9'] = '不能为空'
         a['v9'] = ''
@@ -484,6 +490,7 @@ def check(a,b,type):
             a['v9'] = ''
             ok = 0;
     #type
+    # system or control
     if not a['v10']:
         b['error10'] = '不能为空'
         a['v10'] = ''
@@ -496,6 +503,7 @@ def check(a,b,type):
             a['v10'] = ''
             ok = 0;
     #enalbled
+    # false or true
     if not a['v11']:
         b['error11'] = '不能为空'
         a['v11'] = ''
@@ -508,6 +516,7 @@ def check(a,b,type):
             a['v11'] = ''
             ok = 0;
     #profile
+    # public private domain any combination
     if not a['v12']:
         b['error12'] = '不能为空'
         a['v12'] = ''
@@ -520,6 +529,7 @@ def check(a,b,type):
             a['v12'] = ''
             ok = 0;
             #redirect_ip
+    # when action = redirect the follow two are vaild
     if a['v9'] == "redirect":
 
         if not a['v14']:
@@ -556,12 +566,15 @@ def check(a,b,type):
             a['v14'] = ''
             ok = 0;
     return a,b,ok
-def abc(request):
-    messages.success(request, "哈哈哈")
+
+#add policy
 def add_page(request,c = 0):
+    # confirm login
     if  request.session.get('is_login', None):
         if request.method == "POST":
+            # button submit
             if 'f_submit' in request.POST:
+                # get input
                 name1 = request.POST['name']
                 process1 = request.POST['process']
                 local_ip1 = request.POST['local_ip']
@@ -573,6 +586,8 @@ def add_page(request,c = 0):
                 action1 = request.POST['action']
                 type1 = request.POST['type']
                 enalbled1 = request.POST['enalbled']
+
+                # got checkbox and change to *|*|* format
                 if not request.POST.get('public') == None:
                     profile1 = 'public'
                 else:
@@ -592,26 +607,29 @@ def add_page(request,c = 0):
                 redirect_ip1 = request.POST['redirect_ip']
                 redirect_port1 = request.POST['redirect_port']
 
+                # input dirc, send to check function to check
                 values = {'v1': name1, 'v2': process1, 'v3': local_ip1, 'v4': local_port1, 'v5': remote_ip1,
                           'v6': remote_port1, 'v7': protocol1, 'v8': direction1, 'v9': action1, 'v10': type1,
                           'v11': enalbled1, 'v12': profile1,'v13':redirect_ip1,'v14':redirect_port1 }
 
+                # error diec to return
                 empty_error = {'error1': '', 'error2': '', 'error3': '', 'error4': '', 'error5': '', 'error6': '',
                                'error7': '', 'error8': '', 'error9': '', 'error10': '', 'error11': '', 'error12': '','error13':'','error14':'' }
                 ok = 1;
-
+                # check
                 values, empty_error, ok = check(values, empty_error, 1)
                 # ttest1 = {}
                 # for iter1 in models.firewall.objects.all():
                 #     ttest1[iter1.name] = iter1.name
 
                 if ok == 1:
+                    # add
                     print("add")
                     if action1 == "redirect":
                         content_all = "name:"+name1+" process:"+process1+" local_ip:"+local_ip1+" local_port:"+local_port1+" remote_ip:"+remote_ip1+" remote_port:"+remote_port1+" protocol:"+protocol1+" direction:"+direction1+" action:"+action1+" type:"+type1+" enalbled:" + enalbled1+" profile:"+profile1+" redirect_ip:"+redirect_ip1+" redirect_port:"+redirect_port1
                     else:
                         content_all = "name:"+name1+" process:"+process1+" local_ip:"+local_ip1+" local_port:"+local_port1+" remote_ip:"+remote_ip1+" remote_port:"+remote_port1+" protocol:"+protocol1+" direction:"+direction1+" action:"+action1+" type:"+type1+" enalbled:" + enalbled1+" profile:"+profile1
-
+                    # add policy
                     tmp = models.firewall.objects.create(name=name1, process=process1, local_ip=local_ip1,
                                                    local_port=local_port1,
                                                    remote_ip=remote_ip1, remote_port=remote_port1, protocol=protocol1,
@@ -620,36 +638,44 @@ def add_page(request,c = 0):
                                                    redirect_ip = redirect_ip1,redirect_port = redirect_port1,
                                                    content_all1=content_all,add_time=time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" User:"+request.session['user_name'],
                                                          last_change = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" User:"+request.session['user_name'])
+                    # add log
                     models.log.objects.create(operation='Add',user = request.session['user_name'] , befor='',after=content_all,id_f=tmp.id)
                     rule_list = models.firewall.objects.all()
                     return render(request, 'info_all.html', {'li': rule_list})
                 else:
                     from collections import Counter
-
+                    # return right input and change wrong input to '' and return
                     z = {**values, **empty_error}
                     return render(request, 'info_add_page.html', z)
             else:
+                # init
                 rule_list = models.firewall.objects.all()
                 return render(request, 'info_all.html', {'li': rule_list})
     else:
         return redirect('/login')
+
+# some function in info_all html
 def search(request):
     if request.session.get('is_login', None):
+        # search
         if 'search' in request.POST:
+            # fuzzy Matching
             rule_list = models.firewall.objects.all().filter(name__icontains=request.POST['search_name'])
             return render(request, 'info_all.html', {'li': rule_list})
+        # show all log of policy
         elif 'log' in request.POST:
             log_list = models.log.objects.all()
             return render(request,'info_log.html',{'li':log_list})
+        # download policy
         elif 'download' in request.POST:
+            # open selection window to got address
             root = tk.Tk()
-
             root.withdraw()
-
+            # complete address
             file_path = filedialog.asksaveasfilename(title=u'保存文件', filetypes=[("TXT", ".txt")])
             print(file_path + ".txt")
             rule_list = models.firewall.objects.all().order_by('id').order_by('type')
-
+            # open(create) file
             f = open(file_path + ".txt", 'a')
             for li in rule_list:
                 f.write('id:'+str(li.id)+' '+li.content_all1)
@@ -658,61 +684,72 @@ def search(request):
             rule_list = models.firewall.objects.all()
             return render(request, 'info_all.html', {'li': rule_list})
         else:
+            # init
             return render(request, 'info_add_page.html')
     else:
         return redirect('/login')
-def admin_m(request):
-    pass
+
+# search function in policy's log(for one or all)
 def log(request):
-    # log_list = models.log.objects.all()
+    # back
     if 'back' in request.POST:
         if request.session.get('log_info'):
             request.session.pop('log_info')
         return redirect("/index/")
     t = request.get_full_path().split("id=", 1)
-    print(len(t))
-
+    # print(len(t))
+    # one policy's log
+    # to confirm one or all policy,use session'log_info' to store the policy id(if is all , store nothing)
     if len(t) > 1:
         v = request.get_full_path().split("id=", 1)[1]
         log_list = models.log.objects.filter(id_f=v)
         request.session['log_info'] = v
     else:
         if(not request.session.get('log_info')):
+            # all policy log
             log_list = models.log.objects.all()
         else:
+            # one policy log
             log_list = models.log.objects.filter(id_f=request.session['log_info'])
+    # search
     if 'search_log' in request.POST:
-        # t = request.get_full_path().split("id=", 1)
         s = request.POST['search_name'].lower()
         if  re.search(s, 'add') or  re.search(s, 'delete') or  re.search(s, 'change'):
+            # search by operation
             log_list = log_list.filter(operation__icontains=s)
         else:
+            # search by operator name
             log_list = log_list.filter(user__icontains=s)
         return render(request, 'info_log.html', {'li': log_list})
-    # v = request.get_full_path().split("id=", 1)[1]
-    # log_list = models.log.objects.filter(id_f = v)
-    # t = request.get_full_path().split("id=", 1)
-    # v = request.get_full_path().split("id=", 1)[1]
-    # log_list = models.log.objects.filter(id_f=v)
     return render(request, 'info_log.html', {'li': log_list})
+
+# delete policy
 def D(request):
+    # confirm login
     if request.session.get('is_login', None):
+        # get id
         v = request.get_full_path().split("id=", 1)[1]
+        # delete
         tmp = models.firewall.objects.get(pk = v)
         models.firewall.objects.filter(id=v).delete()
+        # add log
         models.log.objects.create(operation='Delete', user=request.session['user_name'], befor=tmp.content_all1, after='',
                                   id_f=v)
-
         rule_list = models.firewall.objects.all()
         return render(request, 'info_all.html', {'li': rule_list})
     else:
         return redirect('/login')
+
+# change policy
 def change_(request):
+    # confirm login
     if  request.session.get('is_login', None):
         if request.method == "POST":
-            print("00")
+            # print("00")
+            # submit button
             if 'c_submit' in request.POST:
-                print("01")
+                # print("01")
+                # get input
                 print(request.POST['direction'])
                 print(request.POST['action'])
                 print(request.POST['type'])
@@ -731,7 +768,7 @@ def change_(request):
                 action1 = request.POST['action']
                 type1 = request.POST['type']
                 enalbled1 = request.POST['enalbled']
-
+                # same as add
                 if not request.POST.get('public') == None:
                     profile1 = 'public'
                 else :
@@ -750,11 +787,10 @@ def change_(request):
                         profile1 +='|domain'
 
 
-                print(profile1)
-                # profile1 = request.POST['profile']
+                # print(profile1)
                 redirect_ip1 = request.POST['redirect_ip']
                 redirect_port1 = request.POST['redirect_port']
-
+                # same as add
                 values_t = {'v1': name1, 'v2': process1, 'v3': local_ip1, 'v4': local_port1, 'v5': remote_ip1,
                             'v6': remote_port1,
                             'v7': protocol1, 'v8': direction1, 'v9': action1, 'v10': type1, 'v11': enalbled1,
@@ -765,20 +801,10 @@ def change_(request):
                                'error8': '', 'error9': '', 'error10': '', 'error11': '', 'error12': '','error13': '','error14': '', }
 
                 values_t, empty_error, ok = check(values_t, empty_error, 2)
-
+                # same as add
                 # ok = 1  #
                 if ok == 1:
-                    print(1)
-                    # v = tmp = models.var.objects.get(pk = 1).var
-                    # tmp1 = models.var.objects.filter(id=1)
-                    # v = 0
-                    # for ttmp1 in tmp1:
-                    #     v = ttmp1.var
-                    # tmp2 = models.firewall.objects.filter(id = v)
-                    # content_all_tmp2 = ''
-                    # for ttmp2 in tmp2:
-                    #     content_all_tmp2 = ttmp2.content_all1
-                    # models.firewall.objects.filter(id=v).delete()
+                    # print(1)
 
                     tmp = models.firewall.objects.get(pk=request.session['id_c_c'])
 
@@ -806,9 +832,8 @@ def change_(request):
                 pass
             rule_list = models.firewall.objects.all()
             return render(request, 'info_all.html', {'li': rule_list})
+        # init get the policy
         request.session['id_c_c'] = ar=request.get_full_path().split("id=", 1)[1]
-        # models.var.objects.filter(id=1).delete()  # = request.get_full_path().split("id=", 1)[1]
-        # models.var.objects.create(id=1, var=request.get_full_path().split("id=", 1)[1])
         rule_list = models.firewall.objects.all().filter(id=request.session['id_c_c'])
         for li in rule_list:
             name1 = li.name
@@ -831,29 +856,31 @@ def change_(request):
         return render(request, 'info_change_page.html', values)
     else:
         return redirect('/login')
+
+# main page
 def index(request):
+    # session'log_info' used in search , must be none if out of search page
     if request.session.get('log_info'):
         request.session.pop('log_info')
     rule_list = models.firewall.objects.all()
-    value1 = []
-    value2 = []
-    a = 1
     if request.method == "POST":
         rule_list = models.firewall.objects.all()
     return render(request,'info_all.html',{'li':rule_list})
-def index1(request):
-    if request.method == "POST":
-        models.Rule.objects.filter(number=request.POST['number']).delete()
-    rule_list = models.Rule.objects.all()
-    return render(request,'info_all.html',{'li':rule_list})
+
+# show one policy
 def show(request):
+    # confirm login
     if  request.session.get('is_login', None):
+        # back
         if 's_back' in request.POST:
             rule_list = models.firewall.objects.all()
             return render(request, 'info_all.html', {'li': rule_list})
+        # get id
         request.session['id_c_c'] = ar=request.get_full_path().split("id=", 1)[1]
         # models.var.objects.filter(id=1).delete()  # = request.get_full_path().split("id=", 1)[1]
         # models.var.objects.create(id=1, var=request.get_full_path().split("id=", 1)[1])
+
+        # get info
         rule_list = models.firewall.objects.all().filter(id=request.session['id_c_c'])
         for li in rule_list:
             name1 = li.name
