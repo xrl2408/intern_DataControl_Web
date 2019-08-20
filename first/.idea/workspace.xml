@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c9fcf206-a9af-48c2-88cf-0ed2b3780fd7" name="Default Changelist" comment="" />
+    <list default="true" id="c9fcf206-a9af-48c2-88cf-0ed2b3780fd7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/info_all.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/info_all.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,17 +66,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-76">
-              <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            <state relative-caret-position="-266">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/back_regi.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="87" selection-start-line="87" selection-end-line="87" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="627">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/back_regi.html">
+        <entry file="file://$PROJECT_DIR$/templates/info_all.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1653">
-              <caret line="87" selection-start-line="87" selection-end-line="87" />
+            <state relative-caret-position="252">
+              <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
             </state>
           </provider>
         </entry>
@@ -80,7 +102,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/back.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
+            <state relative-caret-position="323">
               <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
             </state>
           </provider>
@@ -89,7 +111,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
+            <state relative-caret-position="-1482">
               <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
             </state>
           </provider>
@@ -98,7 +120,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/cover.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
+            <state relative-caret-position="152">
               <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
             </state>
           </provider>
@@ -116,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/web1/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="92">
-              <caret line="872" column="38" lean-forward="true" selection-start-line="872" selection-start-column="38" selection-end-line="872" selection-end-column="38" />
+            <state relative-caret-position="214">
+              <caret line="843" column="20" selection-start-line="843" selection-start-column="20" selection-end-line="843" selection-end-column="20" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
                 <element signature="e#389#498#0" />
@@ -130,16 +152,8 @@
                 <element signature="e#6337#6970#0" />
                 <element signature="e#7003#10108#0" />
                 <element signature="e#10135#10440#0" />
-                <element signature="e#10470#10862#0" />
-                <element signature="e#10888#18718#0" />
-                <element signature="e#18741#18773#0" />
-                <element signature="e#18807#23434#0" />
-                <element signature="e#23460#24595#0" />
-                <element signature="e#24622#24626#0" />
-                <element signature="e#26036#26557#0" />
-                <element signature="e#26584#33355#0" />
-                <element signature="e#33380#33680#0" />
-                <element signature="e#33706#33905#0" />
+                <element signature="e#33822#34027#0" />
+                <element signature="e#34051#35613#0" />
               </folding>
             </state>
           </provider>
@@ -148,7 +162,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/info_one.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1223">
+            <state relative-caret-position="4465">
               <caret line="235" column="14" selection-start-line="235" selection-start-column="14" selection-end-line="235" selection-end-column="14" />
             </state>
           </provider>
@@ -186,6 +200,35 @@
       <find>t3.html</find>
       <find>t4.html</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="UI_login" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
+    <excluded-from-favorite>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$/.." source="master" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </excluded-from-favorite>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -234,13 +277,13 @@
         <option value="$PROJECT_DIR$/first/urls.py" />
         <option value="$PROJECT_DIR$/templates/show.html" />
         <option value="$PROJECT_DIR$/templates/t1.html" />
-        <option value="$PROJECT_DIR$/templates/info_all.html" />
         <option value="$PROJECT_DIR$/templates/info_add_page.html" />
         <option value="$PROJECT_DIR$/templates/info_change_page.html" />
         <option value="$PROJECT_DIR$/templates/info_log.html" />
         <option value="$PROJECT_DIR$/templates/info_one.html" />
         <option value="$PROJECT_DIR$/templates/cover.html" />
         <option value="$PROJECT_DIR$/web1/views.py" />
+        <option value="$PROJECT_DIR$/templates/info_all.html" />
       </list>
     </option>
   </component>
@@ -249,6 +292,7 @@
     <option name="width" value="981" />
     <option name="height" value="1032" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -281,9 +325,10 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="database.console.LAST_STATE" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/JS" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -367,11 +412,12 @@
       <workItem from="1565919113292" duration="173000" />
       <workItem from="1565924439166" duration="6451000" />
       <workItem from="1566175727956" duration="6507000" />
+      <workItem from="1566269874138" duration="771000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="250806000" />
+    <option name="totallyTimeSpent" value="251577000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -385,12 +431,12 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21018593" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21341956" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4995958" weight="0.32978722" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49636218" weight="0.26595744" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49555376" weight="0.26465365" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39893618" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -400,7 +446,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" weight="0.32972974" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.2960993" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50363785" side_tool="true" visible="true" weight="0.26595744" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50444627" side_tool="true" visible="true" weight="0.26465365" />
       <window_info anchor="bottom" id="Python Console" order="13" weight="0.32792792" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -426,20 +472,8 @@
     <entry file="file://$PROJECT_DIR$/web1/apps.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-353">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="46">
-          <caret line="70" selection-start-line="70" selection-end-line="70" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/utils.py" />
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/base.py" />
     <entry file="file://$PROJECT_DIR$/web1/migrations/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -505,13 +539,7 @@
         <state relative-caret-position="-2565" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="14003">
-          <caret line="765" selection-start-line="765" selection-end-line="765" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/forms/fields.py" />
     <entry file="file://$PROJECT_DIR$/templates/log_back.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -519,16 +547,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/operations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="152" column="31" lean-forward="true" selection-start-line="152" selection-start-column="31" selection-end-line="152" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/mysql/operations.py" />
     <entry file="file://$PROJECT_DIR$/T1/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -536,15 +555,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/base/operations.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/db/backends/base/operations.py" />
     <entry file="file://$PROJECT_DIR$/web1/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
@@ -555,18 +566,6 @@
             <element signature="e#513#840#0" />
             <element signature="e#871#921#0" />
             <element signature="e#953#1380#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="855">
-          <caret line="45" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="n#style#0;n#h2#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#1;n#form#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -598,16 +597,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/t1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="19" selection-end-line="65" selection-end-column="14" />
-          <folding>
-            <element signature="e#1740#1812#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/t1.html" />
     <entry file="file://$PROJECT_DIR$/templates/info_add_page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -615,23 +605,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/t3.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="199" column="18" lean-forward="true" selection-end-line="235" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/info_all.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="65" column="14" selection-start-line="65" selection-start-column="14" selection-end-line="65" selection-end-column="14" />
-          <folding>
-            <element signature="e#1739#1811#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/t3.html" />
     <entry file="file://$PROJECT_DIR$/templates/info_change_page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -646,59 +620,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/show.html">
+    <entry file="file://$PROJECT_DIR$/templates/show.html" />
+    <entry file="file://$PROJECT_DIR$/templates/register.html" />
+    <entry file="file://$PROJECT_DIR$/templates/base_site.html" />
+    <entry file="file://$PROJECT_DIR$/templates/t4.html" />
+    <entry file="file://$PROJECT_DIR$/templates/t2.html" />
+    <entry file="file://$PROJECT_DIR$/templates/fieldset.html" />
+    <entry file="file://$PROJECT_DIR$/templates/CreateUser.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="218" column="45" selection-end-line="235" selection-end-column="14" />
+        <state relative-caret-position="1178">
+          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/info_one.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1223">
+        <state relative-caret-position="4465">
           <caret line="235" column="14" selection-start-line="235" selection-start-column="14" selection-end-line="235" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/register.html">
+    <entry file="file://$PROJECT_DIR$/templates/cover.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="7" lean-forward="true" selection-start-line="18" selection-start-column="7" selection-end-line="18" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base_site.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="14" lean-forward="true" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/t4.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="24" column="110" lean-forward="true" selection-end-line="52" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/t2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="27" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="27" />
+        <state relative-caret-position="152">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
+        <state relative-caret-position="-1482">
           <caret line="39" column="20" selection-start-line="39" selection-start-column="20" selection-end-line="39" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/back.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web1/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="872" column="38" lean-forward="true" selection-start-line="872" selection-start-column="38" selection-end-line="872" selection-end-column="38" />
+        <state relative-caret-position="214">
+          <caret line="843" column="20" selection-start-line="843" selection-start-column="20" selection-end-line="843" selection-end-column="20" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
             <element signature="e#389#498#0" />
@@ -711,59 +677,37 @@
             <element signature="e#6337#6970#0" />
             <element signature="e#7003#10108#0" />
             <element signature="e#10135#10440#0" />
-            <element signature="e#10470#10862#0" />
-            <element signature="e#10888#18718#0" />
-            <element signature="e#18741#18773#0" />
-            <element signature="e#18807#23434#0" />
-            <element signature="e#23460#24595#0" />
-            <element signature="e#24622#24626#0" />
-            <element signature="e#26036#26557#0" />
-            <element signature="e#26584#33355#0" />
-            <element signature="e#33380#33680#0" />
-            <element signature="e#33706#33905#0" />
+            <element signature="e#33822#34027#0" />
+            <element signature="e#34051#35613#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/fieldset.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="45" selection-start-line="14" selection-start-column="45" selection-end-line="14" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/cover.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-76">
-          <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/back.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="25" column="40" selection-start-line="25" selection-start-column="40" selection-end-line="25" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/CreateUser.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1178">
-          <caret line="62" column="20" selection-start-line="62" selection-start-column="20" selection-end-line="62" selection-end-column="20" />
+        <state relative-caret-position="-266">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/back_regi.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1653">
+        <state relative-caret-position="323">
           <caret line="87" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/info_all.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
