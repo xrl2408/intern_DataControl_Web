@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+ 
+
+{% block title %}注册{% endblock %}
+
+{% block content %}
+
+    <div >
+
+        <div >
+
+          <form  action="/log_b/" method="post">
+
+
+
+              <button  class="btn btn-default pull-left" style="margin-bottom: 20px; margin-left: 20px" name="back">返回</button>
+
+    <div>
+    <table  class="table table-striped table-bordered" >
+        <tr>
+            <th>time</th>
+            <th>operation</th>
+            <th>user</th>
+            <th>befor</th>
+            <th>after</th>
+        </tr>
+        {% for item in li %}
+        <tr>
+            <td>{{ item.time }}</td>
+            <td>{{ item.operation }}</td>
+            <td>{{ item.user }}</td>
+            <td>{{ item.befor }}</td>
+            <td>{{ item.after }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+    </div>
+
+          </form>
+
+        </div>
+
+    </div> <!-- /container -->
+
+{% endblock %}
