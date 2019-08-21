@@ -143,7 +143,7 @@ def log_b(request):
         # for li in log_list:
         #     list.append(li.time.strftime(
         #         "%Y-%m-%d %H:%M") + ' id: ' + li.id_f + ' operator: ' + li.user + ' operation: ' + li.operation + ' befor: ' + li.befor + ' after: ' + li.after)
-        return render(request, 'info_log.html', {'li': log_list})
+        return render(request, 'log_back.html', {'li': log_list})
 
     # list = []
 
