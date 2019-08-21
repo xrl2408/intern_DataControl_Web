@@ -110,26 +110,47 @@ def Change_b(request):
 
 # get log of user admin from database
 def log_b(request):
+    # back
+    list = []
+    if 'back' in request.POST:
+        if request.session.get('log_back'):
+            request.session.pop('log_back')
+        return redirect("/back/")
     # get the request is one or all
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
         return redirect('/login')
-    v = request.get_full_path().split("id=", 1)
-    if len(v) == 1:
-        # request all log
-        user_log_list = models.log_b.objects.all()
+    t = request.get_full_path().split("id=", 1)
+    if len(t) > 1:
+        v = request.get_full_path().split("id=", 1)[1]
+        log_list = models.log_b.objects.filter(id_f=v)
+        request.session['log_back'] = v
     else:
-        # request one user's log
-        user_log_list = models.log_b.objects.filter(id_f = v[1])
-    # back
-    if 'back' in request.POST:
-        return redirect("/back/")
+        if(not request.session.get('log_back')):
+            # all policy log
+            log_list = models.log_b.objects.all()
+        else:
+            # one policy log
+            log_list = models.log_b.objects.filter(id_f=request.session['log_back'])
+    # search
+    if 'search_log' in request.POST:
+        s = request.POST['search_name'].lower()
+        if  re.search(s, 'add') or  re.search(s, 'delete') or  re.search(s, 'change'):
+            # search by operation
+            log_list = log_list.filter(operation__icontains=s)
+        else:
+            # search by operator name
+            log_list = log_list.filter(user__icontains=s)
+        # for li in log_list:
+        #     list.append(li.time.strftime(
+        #         "%Y-%m-%d %H:%M") + ' id: ' + li.id_f + ' operator: ' + li.user + ' operation: ' + li.operation + ' befor: ' + li.befor + ' after: ' + li.after)
+        return render(request, 'info_log.html', {'li': log_list})
 
-    list = []
+    # list = []
 
-    for li in user_log_list:
-        list.append(li.time.strftime("%Y-%m-%d %H:%M")+' id: '+li.id_f+' operator: '+li.user+' operation: '+li.operation+' befor: '+li.befor+' after: '+li.after)
+    # for li in log_list:
+    #     list.append(li.time.strftime("%Y-%m-%d %H:%M")+' id: '+li.id_f+' operator: '+li.user+' operation: '+li.operation+' befor: '+li.befor+' after: '+li.after)
 
-    return render(request, 'log_back.html', {'li': user_log_list})
+    return render(request, 'log_back.html', {'li': log_list})
 
 # login
 def login(request):
@@ -188,6 +209,8 @@ def back(request):
     # make sure session log_info is empty(used in search function in log of policy to get it's for on or for all)
     if request.session.get('log_info'):
         request.session.pop('log_info')
+    if request.session.get('log_back'):
+        request.session.pop('log_back')
 
     # confirm level
     if  not (request.session.get('is_login', None) and request.session.get('level') =='3'):
@@ -862,6 +885,8 @@ def index(request):
     # session'log_info' used in search , must be none if out of search page
     if request.session.get('log_info'):
         request.session.pop('log_info')
+    if request.session.get('log_back'):
+        request.session.pop('log_back')
     rule_list = models.firewall.objects.all()
     if request.method == "POST":
         rule_list = models.firewall.objects.all()
